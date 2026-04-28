@@ -50,3 +50,18 @@ pulse/
 - [FORMULATION.md](./FORMULATION.md) — The standards every feature must pass
 - [BACKLOG.md](./BACKLOG.md) — Full backlog with epics, priorities, and acceptance criteria
 - [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — How the system is built and why
+
+---
+
+## Development
+
+Requires **Node.js 20+**.
+
+```bash
+npm install
+npm start          # listens on PORT or 3200 — see src/server.js
+# npm run dev      # nodemon (reload on change)
+```
+
+- Health check: `GET http://localhost:3200/health` → `{ "status": "ok", "timestamp": "<ISO8601>" }`
+- SQLite database file: `data/pulse.db` (created on first run; ignored by git)
