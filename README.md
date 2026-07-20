@@ -50,3 +50,25 @@ pulse/
 - [FORMULATION.md](./FORMULATION.md) — The standards every feature must pass
 - [BACKLOG.md](./BACKLOG.md) — Full backlog with epics, priorities, and acceptance criteria
 - [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — How the system is built and why
+
+---
+
+## Quickstart
+
+```bash
+cp .env.example .env      # fill in PULSE_PASSWORD + Google OAuth + SESSION_SECRET
+npm install
+npm start                 # → http://localhost:3000
+```
+
+Health check:
+
+```bash
+curl http://localhost:3000/health   # {"status":"ok","ts":"..."}
+```
+
+Tests:
+
+```bash
+npm test                 # Node built-in test runner
+```
