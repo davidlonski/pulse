@@ -1,0 +1,15 @@
+{
+  "name": "pulse",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pulse — proactive ambient second brain. Local-first, read-only from Google Calendar + Gmail, surfaces what matters before you ask.",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
