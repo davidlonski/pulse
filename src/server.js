@@ -1,15 +1,23 @@
 import express from "express";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { openDb } from "./db/index.js";
+import { createApiRouter } from "./routes/api.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export function createApp() {
+export function createApp({ db } = {}) {
+  let _db = db;
+  const resolveDb = () => (_db ??= openDb());
+
   const app = express();
+  app.use(express.json());
 
   app.get("/health", (_req, res) => {
     res.json({ status: "ok", ts: new Date().toISOString() });
   });
+
+  app.use("/api", createApiRouter(() => resolveDb()));
 
   app.use(express.static(path.join(__dirname, "..", "public")));
 

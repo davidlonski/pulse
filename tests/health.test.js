@@ -1,9 +1,17 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { DatabaseSync } from "node:sqlite";
 import { createApp } from "../src/server.js";
+import { MIGRATIONS } from "../src/db/index.js";
+
+function makeTempDb() {
+  const db = new DatabaseSync(":memory:");
+  db.exec(MIGRATIONS);
+  return db;
+}
 
 test("GET /health returns 200 and { status: 'ok' }", async () => {
-  const app = createApp();
+  const app = createApp({ db: makeTempDb() });
   const server = app.listen(0);
   const { port } = server.address();
   try {
@@ -19,7 +27,7 @@ test("GET /health returns 200 and { status: 'ok' }", async () => {
 });
 
 test("static dashboard is served at /", async () => {
-  const app = createApp();
+  const app = createApp({ db: makeTempDb() });
   const server = app.listen(0);
   const { port } = server.address();
   try {
