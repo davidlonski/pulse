@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "test": "node --experimental-sqlite --test"
+    "test": "node --experimental-sqlite --test",
+    "seed-demo": "node --experimental-sqlite scripts/seed-demo.js"
   },
   "dependencies": {
     "express": "^4.21.2",
