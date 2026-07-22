@@ -136,3 +136,69 @@ details summary { cursor: pointer; color: var(--muted); font-size: 13px; }
   font-size: 12px;
   padding: 16px;
 }
+
+/* === Upcoming events panel (issue #23 / UI-002) === */
+.upcoming {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.upcoming-section {
+  margin-bottom: 12px;
+}
+.upcoming-section:last-child { margin-bottom: 0; }
+.upcoming-heading {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+.upcoming-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  padding: 8px 10px;
+  margin: 0 -10px 6px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.upcoming-item:last-child { margin-bottom: 0; }
+.upcoming-item .title {
+  flex: 1 1 auto;
+  color: var(--text);
+  font-weight: 500;
+  min-width: 0;
+  word-break: break-word;
+}
+.upcoming-item .when {
+  font-size: 12px;
+  color: var(--muted);
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+.upcoming-item .loc {
+  display: block;
+  flex: 1 1 100%;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+  font-style: italic;
+}
+.upcoming-item.imminent {
+  border-left-color: #f59e0b;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.08) 0%, var(--panel-2) 40%);
+}
+.upcoming-item.imminent .title {
+  color: #fbbf24;
+}
+.upcoming-item.imminent .when {
+  color: #fbbf24;
+  font-weight: 600;
+}
