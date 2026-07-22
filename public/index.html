@@ -18,6 +18,18 @@
       <ul id="feed" class="feed"><li class="muted">Loading…</li></ul>
     </section>
 
+    <section class="panel" id="panel-upcoming">
+      <h2>Upcoming Events</h2>
+      <div class="upcoming-section" data-bucket="today">
+        <h3 class="upcoming-heading">Today</h3>
+        <ul id="upcoming-today" class="upcoming"><li class="muted">No events.</li></ul>
+      </div>
+      <div class="upcoming-section" data-bucket="tomorrow">
+        <h3 class="upcoming-heading">Tomorrow</h3>
+        <ul id="upcoming-tomorrow" class="upcoming"><li class="muted">No events.</li></ul>
+      </div>
+    </section>
+
     <section class="panel" id="panel-briefing">
       <h2>Morning Briefing</h2>
       <div id="briefing" class="briefing muted">Loading…</div>
@@ -37,6 +49,6 @@
     <span id="poll-info">refreshes every 5 min</span>
   </footer>
 
-  <script src="/dashboard.js"></script>
+  <script type="module" src="/dashboard.js"></script>
 </body>
 </html>

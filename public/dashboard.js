@@ -1,3 +1,5 @@
+import { bucketizeEvents, isImminent } from "./upcoming.js";
+
 const POLL_MS = 5 * 60 * 1000;
 
 function fmt(iso) {
@@ -49,6 +51,21 @@ function renderStatus({ last_sync, sources, nudges_today }) {
   badge.textContent = last_sync ? `synced ${fmt(last_sync)}` : "no sync yet";
 }
 
+function renderUpcoming(events) {
+  const { today, tomorrow } = bucketizeEvents(events || []);
+  const renderBucket = (id, list) => {
+    const el = document.getElementById(id);
+    if (!list.length) { el.innerHTML = `<li class="muted">No events.</li>`; return; }
+    el.innerHTML = list.map((e) => {
+      const imminent = isImminent(e.start_time) ? " imminent" : "";
+      const loc = e.location ? `<span class="loc">${esc(e.location)}</span>` : "";
+      return `<li class="upcoming-item${imminent}"><span class="title">${esc(e.title)}</span><span class="when">${fmt(e.start_time)}</span>${loc}</li>`;
+    }).join("");
+  };
+  renderBucket("upcoming-today", today);
+  renderBucket("upcoming-tomorrow", tomorrow);
+}
+
 function esc(s) {
   return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
@@ -62,6 +79,7 @@ async function refresh() {
       getJson("/api/status"),
     ]);
     renderFeed({ events: events.events, emails: emails.emails });
+    renderUpcoming(events.events);
     renderBriefing(briefings);
     renderStatus(status);
   } catch (e) {
